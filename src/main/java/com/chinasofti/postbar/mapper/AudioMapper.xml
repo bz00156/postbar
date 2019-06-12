@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinasofti.postbar.mapper.AudioMapper">
+    <resultMap id="BaseResultMap" type="com.chinasofti.postbar.dto.Audio">
+        <id column="auSetUUID" jdbcType="VARCHAR" property="auSetUUID"/>
+        <result column="userUUID" jdbcType="VARCHAR" property="userUUID"/>
+        <result column="auSetSpd" jdbcType="INTEGER" property="auSetSpd"/>
+        <result column="auSetPit" jdbcType="INTEGER" property="auSetPit"/>
+        <result column="auSetVol" jdbcType="INTEGER" property="auSetVol"/>
+        <result column="auSetVoiPer" jdbcType="INTEGER" property="auSetVoiPer"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    auSetUUID, userUUID, auSetSpd, auSetPit, auSetVol, auSetVoiPer
+  </sql>
+    <select id="selectByExample" parameterType="com.chinasofti.postbar.dto.AudioExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from pb_audio
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from pb_audio
+        where auSetUUID = #{auSetUUID,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from pb_audio
+    where auSetUUID = #{auSetUUID,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.chinasofti.postbar.dto.AudioExample">
+        delete from pb_audio
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.chinasofti.postbar.dto.Audio">
+    insert into pb_audio (auSetUUID, userUUID, auSetSpd, 
+      auSetPit, auSetVol, auSetVoiPer
+      )
+    values (#{auSetUUID,jdbcType=VARCHAR}, #{userUUID,jdbcType=VARCHAR}, #{auSetSpd,jdbcType=INTEGER}, 
+      #{auSetPit,jdbcType=INTEGER}, #{auSetVol,jdbcType=INTEGER}, #{auSetVoiPer,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.chinasofti.postbar.dto.Audio">
+        insert into pb_audio
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auSetUUID != null">
+                auSetUUID,
+            </if>
+            <if test="userUUID != null">
+                userUUID,
+            </if>
+            <if test="auSetSpd != null">
+                auSetSpd,
+            </if>
+            <if test="auSetPit != null">
+                auSetPit,
+            </if>
+            <if test="auSetVol != null">
+                auSetVol,
+            </if>
+            <if test="auSetVoiPer != null">
+                auSetVoiPer,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="auSetUUID != null">
+                #{auSetUUID,jdbcType=VARCHAR},
+            </if>
+            <if test="userUUID != null">
+                #{userUUID,jdbcType=VARCHAR},
+            </if>
+            <if test="auSetSpd != null">
+                #{auSetSpd,jdbcType=INTEGER},
+            </if>
+            <if test="auSetPit != null">
+                #{auSetPit,jdbcType=INTEGER},
+            </if>
+            <if test="auSetVol != null">
+                #{auSetVol,jdbcType=INTEGER},
+            </if>
+            <if test="auSetVoiPer != null">
+                #{auSetVoiPer,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.chinasofti.postbar.dto.AudioExample" resultType="java.lang.Long">
+        select count(*) from pb_audio
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update pb_audio
+        <set>
+            <if test="record.auSetUUID != null">
+                auSetUUID = #{record.auSetUUID,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userUUID != null">
+                userUUID = #{record.userUUID,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auSetSpd != null">
+                auSetSpd = #{record.auSetSpd,jdbcType=INTEGER},
+            </if>
+            <if test="record.auSetPit != null">
+                auSetPit = #{record.auSetPit,jdbcType=INTEGER},
+            </if>
+            <if test="record.auSetVol != null">
+                auSetVol = #{record.auSetVol,jdbcType=INTEGER},
+            </if>
+            <if test="record.auSetVoiPer != null">
+                auSetVoiPer = #{record.auSetVoiPer,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update pb_audio
+        set auSetUUID = #{record.auSetUUID,jdbcType=VARCHAR},
+        userUUID = #{record.userUUID,jdbcType=VARCHAR},
+        auSetSpd = #{record.auSetSpd,jdbcType=INTEGER},
+        auSetPit = #{record.auSetPit,jdbcType=INTEGER},
+        auSetVol = #{record.auSetVol,jdbcType=INTEGER},
+        auSetVoiPer = #{record.auSetVoiPer,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.chinasofti.postbar.dto.Audio">
+        update pb_audio
+        <set>
+            <if test="userUUID != null">
+                userUUID = #{userUUID,jdbcType=VARCHAR},
+            </if>
+            <if test="auSetSpd != null">
+                auSetSpd = #{auSetSpd,jdbcType=INTEGER},
+            </if>
+            <if test="auSetPit != null">
+                auSetPit = #{auSetPit,jdbcType=INTEGER},
+            </if>
+            <if test="auSetVol != null">
+                auSetVol = #{auSetVol,jdbcType=INTEGER},
+            </if>
+            <if test="auSetVoiPer != null">
+                auSetVoiPer = #{auSetVoiPer,jdbcType=INTEGER},
+            </if>
+        </set>
+        where auSetUUID = #{auSetUUID,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.chinasofti.postbar.dto.Audio">
+    update pb_audio
+    set userUUID = #{userUUID,jdbcType=VARCHAR},
+      auSetSpd = #{auSetSpd,jdbcType=INTEGER},
+      auSetPit = #{auSetPit,jdbcType=INTEGER},
+      auSetVol = #{auSetVol,jdbcType=INTEGER},
+      auSetVoiPer = #{auSetVoiPer,jdbcType=INTEGER}
+    where auSetUUID = #{auSetUUID,jdbcType=VARCHAR}
+  </update>
+</mapper>
