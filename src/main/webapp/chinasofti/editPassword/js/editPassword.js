@@ -3,7 +3,6 @@ function subPassword() {
     var newPasswordCon = $("#newPasswordCon").val()
     var oldPassword = $("#oldPassword").val()
 
-
     if (typeof (newPassword) == 'undefined' || newPassword.trim() == "") {
         $("#tishi").html("新密码不能为空");
         return;
@@ -25,7 +24,29 @@ function subPassword() {
         $("#tishi").html("当前密码不能为空");
         return;
     }
+    ajaxLoading();
 
-    window.parent.location.replace("login.html");
-
+    $.ajax({
+        type: "POST",
+        url: "/postbar/login/editPassword",
+        data:{
+            oldPassword:oldPassword.trim(),
+            newPassword:newPassword.trim(),
+        },
+        dataType: "json",
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $.MsgBox.Alert("消息","出错了，请于管理员联系");
+        },
+        success: function (json) {
+            ajaxLoadEnd();
+            console.log(json)
+            if(json.message!==""){
+                window.parent.location.replace("/postbar/post.html");
+            }else if(json.error!==null){
+                $("#tishi").html(json.error);
+            }else{
+                window.parent.location.replace("/postbar/");
+            }
+        }
+    });
 }

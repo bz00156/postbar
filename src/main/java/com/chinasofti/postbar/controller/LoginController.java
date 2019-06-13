@@ -23,7 +23,7 @@ public class LoginController {
     public Result login(HttpServletRequest request, String userName, String password) {
         HttpSession session = request.getSession();
         String pwd = Utils.md5(password);
-        User user = userService.login(userName);
+        User user = userService.getUserByUserName(userName);
         String message = "";
         if (user == null) {
             message = "用户名和密码不正确，请重新输入";
@@ -49,5 +49,23 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.invalidate();
         return Result.ok();
+    }
+
+    @RequestMapping("/editPassword")
+    public Result editPassword(HttpServletRequest request,String oldPassword,String newPassword){
+        String message = "";
+        if(Utils.sessionTimeout(request)){
+            message = "页面过期，请重新登陆";
+        }else{
+            String userName = (String)request.getSession().getAttribute("username");
+            User user = userService.getUserByUserName(userName);
+            if(user!=null && !user.getPassword().equals(Utils.md5(oldPassword))){
+                return Result.error("当前密码输入错误");
+            }else{
+                // 执行修改密码
+                userService.updatePasswordByUserName(userName,Utils.md5(newPassword));
+            }
+        }
+        return Result.ok(message);
     }
 }

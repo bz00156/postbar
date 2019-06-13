@@ -3,6 +3,7 @@ package com.chinasofti.postbar.utils;
 
 public class Result {
     private String message;
+    private String error;
     private Object data;
 
     public Result() {
@@ -37,6 +38,14 @@ public class Result {
         this.data = data;
     }
 
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
     public static Result ok() {
         return new Result("");
     }
@@ -51,5 +60,12 @@ public class Result {
 
     public static Result ok(String message, Object data) {
         return new Result(message, data);
+    }
+
+    public static Result error(String error){
+        Result result = new Result();
+        result.setMessage("");
+        result.setError(error);
+        return result;
     }
 }

@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User login(String userName) {
+    public User getUserByUserName(String userName) {
         UserExample example = new UserExample();
         Criteria criteria = example.createCriteria();
         criteria.andUserNameEqualTo(userName);
@@ -36,6 +36,16 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setLoginTime(datetime);
         userMapper.updateByExampleSelective(user, example);
+    }
+
+    @Override
+    public void updatePasswordByUserName(String userName, String newPassword) {
+        UserExample example = new UserExample();
+        Criteria criteria = example.createCriteria();
+        criteria.andUserNameEqualTo(userName);
+        User user = new User();
+        user.setPassword(newPassword);
+        userMapper.updateByExampleSelective(user,example);
     }
 }
 
