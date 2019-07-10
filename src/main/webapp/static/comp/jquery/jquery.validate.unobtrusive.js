@@ -46,7 +46,8 @@
         if (replace) {
             container.empty();
             error.removeClass("input-validation-error").appendTo(container);
-        } else {
+        }
+        else {
             error.hide();
         }
     }
@@ -155,7 +156,7 @@
                 }
             });
 
-            jQuery.extend(rules, {"__dummy__": true});
+            jQuery.extend(rules, { "__dummy__": true });
 
             if (!skipAttach) {
                 valInfo.attachValidation();
@@ -198,7 +199,7 @@
             fn = params;
             params = [];
         }
-        this.push({name: adapterName, params: params, adapt: fn});
+        this.push({ name: adapterName, params: params, adapt: fn });
         return this;
     };
 
@@ -238,9 +239,11 @@
 
             if (min && max) {
                 setValidationValues(options, minMaxRuleName, [min, max]);
-            } else if (min) {
+            }
+            else if (min) {
                 setValidationValues(options, minRuleName, min);
-            } else if (max) {
+            }
+            else if (max) {
                 setValidationValues(options, maxRuleName, max);
             }
         });
@@ -294,10 +297,10 @@
     });
     adapters.add("remote", ["url", "type", "additionalfields"], function (options) {
         var value = {
-                url: options.params.url,
-                type: options.params.type || "GET",
-                data: {}
-            },
+            url: options.params.url,
+            type: options.params.type || "GET",
+            data: {}
+        },
             prefix = getModelPrefix(options.element.name);
 
         $.each(splitAndTrim(options.params.additionalfields || options.element.name), function (i, fieldName) {

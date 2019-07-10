@@ -1,8 +1,9 @@
-﻿(function ($) {
+﻿
+(function ($) {
     var defaults = {
         allDataCount: 0,//一共有多少条数据
-        everyPageDataCount: 0,//每一页显示多少条数据
-        nowPageCataCount: 0,//当前是第几页
+        everyPageDataCount:0,//每一页显示多少条数据
+        nowPageCataCount:0,//当前是第几页
         success: function (nowPageCataCount/*当前是第几页*/) {
 
         },
@@ -18,10 +19,10 @@
 //            if (defaults.allDataCount != 0) {
 //                defaults.success(defaults.nowPageCataCount);//
 //            }
-
+            
             return this.each(function () {
                 var _this = $(this);
-                //自动计算总页数
+               //自动计算总页数
                 var allpageCount = Math.ceil(defaults.allDataCount / defaults.everyPageDataCount);
 
                 var begin = 0
@@ -31,17 +32,16 @@
                     bool[i] = false;
                 }
                 //首页
-                var firstPageBool = false;
-
+                var firstPageBool=false;
+     
                 //尾页
-                var lastPageBool = false;
-
+                var lastPageBool=false;
+                
                 pageHtml();
-
                 //各种按键响应
                 function keyResponse() {
-                    if (firstPageBool) {
-                        //鼠标移动到第一页链接的响应事件
+                	if(firstPageBool){
+                		//鼠标移动到第一页链接的响应事件
                         var tdFirstPageMouseMove = _this.find("li[id=tdFirstPageId]").get(0);
                         if (tdFirstPageMouseMove.attachEvent) {
                             tdFirstPageMouseMove.attachEvent("onmousemove", function (e) {
@@ -58,7 +58,7 @@
                         }
                         //返回第一页的链接响应事件
                         var tdFirstPageClick = _this.find("li[id=tdFirstPageId]").get(0);
-
+                        
                         if (tdFirstPageClick.attachEvent) {
                             tdFirstPageClick.attachEvent("onclick", function (e) {
                                 defaults.nowPageCataCount = 0;
@@ -108,10 +108,10 @@
 
                             }, false);
                         }
-                    }
-
-                    if (lastPageBool) {
-                        //鼠标移动到下一页链接的响应事件
+                	}
+                    
+                    if(lastPageBool){
+                    	//鼠标移动到下一页链接的响应事件
                         var tdNextPageMouseMove = _this.find("li[id=tdNextPageId]").get(0);
                         if (tdNextPageMouseMove.attachEvent) {
                             tdNextPageMouseMove.attachEvent("onmousemove", function (e) {
@@ -177,8 +177,8 @@
                             }, false);
                         }
                     }
-
-
+                    
+               
                     if (bool[0] == true) {
                         var liSelectPageClick0 = _this.find("li[id=liSelectPageId" + begin + "]").get(0);
                         if (liSelectPageClick0.attachEvent) {
@@ -198,7 +198,7 @@
                             }, false);
                         }
                     }
-
+                  
                     if (bool[1] == true) {
                         var liSelectPageClick1 = _this.find("li[id=liSelectPageId" + (begin + 1) + "]").get(0);
                         if (liSelectPageClick1.attachEvent) {
@@ -218,7 +218,7 @@
                             }, false);
                         }
                     }
-
+                  
                     if (bool[2] == true) {
                         var liSelectPageClick2 = _this.find("li[id=liSelectPageId" + (begin + 2) + "]").get(0);
                         if (liSelectPageClick2.attachEvent) {
@@ -276,31 +276,31 @@
 
                             }, false);
                         }
-                    }
+                    } 
                 }
-
+                
                 function pageHtml() {
                     if (defaults.allDataCount != 0) {
                         if ((defaults.nowPageCataCount + 1) == allpageCount) {
                             lastdisabled = "class='active'";
 
                             //尾页
-                            lastPageBool = false;
+                            lastPageBool=false;
                         } else {
                             lastdisabled = "";
 
                             //尾页
-                            lastPageBool = true;
+                            lastPageBool=true;
                         }
                         if (defaults.nowPageCataCount == 0) {
                             firstdisabled = "class='active'";
                             //首页
-                            firstPageBool = false;
+                           firstPageBool=false;
 
                         } else {
                             firstdisabled = "";
                             //首页
-                            firstPageBool = true;
+                            firstPageBool=true;
 
                         }
                         paginationHtml = "<div style='width:100%;text-align:center'>"
@@ -320,9 +320,9 @@
                             }
                             iEnd = allpageCount;
                             for (var i = 0; i < allpageCount; i++) {
-                                bool[i] = true;
+                                bool[i] = true; 
                             }
-
+                            
                         } else {
                             if (defaults.nowPageCataCount < 3) {
                                 iEnd = 5
@@ -343,7 +343,7 @@
                         end = iEnd;
                         for (var i = iBegin; i < iEnd; i++) {
                             if (defaults.nowPageCataCount == i) {
-                                bool[i - iBegin] = false;
+                            	bool[i-iBegin] = false;
                                 paginationHtml += '       <li class="active" style="background-color: #263476" id="liSelectPageId' + i + '"><a style ="margin-right:3px; margin-left:3px;text-align:center">' + (i + 1) + '</a></li>';
                             } else {
                                 paginationHtml += '       <li id="liSelectPageId' + i + '"><a style ="margin-right:3px; margin-left:3px;text-align:center;cursor:pointer">' + (i + 1) + '</a></li>';
@@ -355,8 +355,8 @@
                         paginationHtml += '</div>';
                         paginationHtml += '</div>';
                         _this.html(paginationHtml);
-                        if (allpageCount > 1) {
-                            keyResponse();
+                        if(allpageCount>1){
+                        	keyResponse();
                         }
                     } else {
                         _this.html("");
@@ -369,7 +369,8 @@
     $.fn.zcPage = function (method) {
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {
+        }
+        else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
         }
     };

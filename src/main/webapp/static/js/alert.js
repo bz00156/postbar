@@ -1,18 +1,18 @@
-(function () {
+(function() {
     $.MsgBox = {
-        Alert: function (title, msg) {
+        Alert: function(title, msg) {
             GenerateHtml("alert", title, msg);
             btnOk(); //alert只是弹出消息，因此没必要用到回调函数callback
             btnNo();
         },
-        Confirm: function (title, msg, callback) {
+        Confirm: function(title, msg, callback) {
             GenerateHtml("confirm", title, msg);
             btnOk(callback);
             btnNo();
         }
     }
     //生成Html
-    var GenerateHtml = function (type, title, msg) {
+    var GenerateHtml = function(type, title, msg) {
         var _html = "";
         _html += '<div id="mb_box"></div><div id="mb_con"><span id="mb_tit">' + title + '</span>';
         _html += '<a id="mb_ico">x</a><div id="mb_msg">' + msg + '</div><div id="mb_btnbox">';
@@ -31,7 +31,7 @@
     }
 
     //生成Css
-    var GenerateCss = function () {
+    var GenerateCss = function() {
         $("#mb_box").css({
             width: '100%',
             height: '100%',
@@ -98,12 +98,12 @@
             marginLeft: '20px'
         });
         //右上角关闭按钮hover样式
-        $("#mb_ico").hover(function () {
+        $("#mb_ico").hover(function() {
             $(this).css({
                 backgroundColor: 'Red',
                 color: 'White'
             });
-        }, function () {
+        }, function() {
             $(this).css({
                 backgroundColor: '#DDD',
                 color: 'black'
@@ -120,17 +120,17 @@
         });
     }
     //确定按钮事件
-    var btnOk = function (callback) {
-        $("#mb_btn_ok").click(function () {
+    var btnOk = function(callback) {
+        $("#mb_btn_ok").click(function() {
             $("#mb_box,#mb_con").remove();
-            if (typeof (callback) == 'function') {
+            if (typeof(callback) == 'function') {
                 callback();
             }
         });
     }
     //取消按钮事件
-    var btnNo = function () {
-        $("#mb_btn_no,#mb_ico").click(function () {
+    var btnNo = function() {
+        $("#mb_btn_no,#mb_ico").click(function() {
             $("#mb_box,#mb_con").remove();
         });
     }

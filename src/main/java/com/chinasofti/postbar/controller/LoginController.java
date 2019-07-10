@@ -19,6 +19,13 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/test")
+    public Result test1(){
+        System.out.println("请求成功");
+        return Result.ok();
+    }
+
+
     @RequestMapping("/doLogin")
     public Result login(HttpServletRequest request, String userName, String password) {
         HttpSession session = request.getSession();

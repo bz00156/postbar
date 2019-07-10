@@ -46,20 +46,20 @@
             var top;
 
             switch (mode) {
-                case "BEFORE":
-                    top = update.firstChild;
-                    $("<div />").html(data).contents().each(function () {
-                        update.insertBefore(this, top);
-                    });
-                    break;
-                case "AFTER":
-                    $("<div />").html(data).contents().each(function () {
-                        update.appendChild(this);
-                    });
-                    break;
-                default:
-                    $(update).html(data);
-                    break;
+            case "BEFORE":
+                top = update.firstChild;
+                $("<div />").html(data).contents().each(function () {
+                    update.insertBefore(this, top);
+                });
+                break;
+            case "AFTER":
+                $("<div />").html(data).contents().each(function () {
+                    update.appendChild(this);
+                });
+                break;
+            default:
+                $(update).html(data);
+                break;
             }
         });
     }
@@ -98,12 +98,12 @@
             error: getFunction(element.getAttribute("data-ajax-failure"), ["xhr", "status", "error"])
         });
 
-        options.data.push({name: "X-Requested-With", value: "XMLHttpRequest"});
+        options.data.push({ name: "X-Requested-With", value: "XMLHttpRequest" });
 
         method = options.type.toUpperCase();
         if (!isMethodProxySafe(method)) {
             options.type = "POST";
-            options.data.push({name: "X-HTTP-Method-Override", value: method});
+            options.data.push({ name: "X-HTTP-Method-Override", value: method });
         }
 
         $.ajax(options);
@@ -130,8 +130,8 @@
             offset = $target.offset();
 
         $(form).data(data_click, [
-            {name: name + ".x", value: Math.round(evt.pageX - offset.left)},
-            {name: name + ".y", value: Math.round(evt.pageY - offset.top)}
+            { name: name + ".x", value: Math.round(evt.pageX - offset.left) },
+            { name: name + ".y", value: Math.round(evt.pageY - offset.top) }
         ]);
 
         setTimeout(function () {
@@ -143,7 +143,7 @@
         var name = evt.target.name,
             form = $(evt.target).parents("form")[0];
 
-        $(form).data(data_click, name ? [{name: name, value: evt.target.value}] : []);
+        $(form).data(data_click, name ? [{ name: name, value: evt.target.value }] : []);
 
         setTimeout(function () {
             $(form).removeData(data_click);
