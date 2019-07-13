@@ -1,71 +1,78 @@
 package com.chinasofti.postbar.utils;
 
+import java.util.HashMap;
+import java.util.Map;
 
 public class Result {
-    private String message;
-    private String error;
-    private Object data;
+    private String msg;
+    private int code;
+    private String token;
+    private final Map<String, Object> data = new HashMap<>();
 
-    public Result() {
+    public String getMsg() {
+        return msg;
     }
 
-    public Result(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public Result(Object data) {
-        this.data = data;
+    public int getCode() {
+        return code;
     }
 
-    public Result(String message, Object data) {
-        this.message = message;
-        this.data = data;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getToken() {
+        return token;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public Object getData() {
+    public Map<String, Object> getData() {
         return data;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public Result put(String key, Object value) {
+        data.put(key, value);
+        return this;
     }
 
-    public String getError() {
-        return error;
+    private Result() {
     }
 
-    public void setError(String error) {
-        this.error = error;
+    private Result(int code) {
+        this.code = code;
+    }
+
+    private Result(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
+    private Result(int code, String msg, String token) {
+        this.code = code;
+        this.msg = msg;
+        this.token = token;
     }
 
     public static Result ok() {
-        return new Result("");
+        return new Result(200, "Ok");
     }
 
-    public static Result ok(Object data) {
-        return new Result("", data);
+    public static Result ok(String token) {
+        return new Result(200, "Ok", token);
     }
 
-    public static Result ok(String message) {
-        return new Result(message);
+    public static Result err() {
+        return new Result(100);
     }
 
-    public static Result ok(String message, Object data) {
-        return new Result(message, data);
-    }
-
-    public static Result error(String error){
-        Result result = new Result();
-        result.setMessage("");
-        result.setError(error);
-        return result;
+    public static Result err(String msg) {
+        return new Result(100, msg);
     }
 }

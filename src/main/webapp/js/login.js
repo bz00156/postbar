@@ -30,21 +30,26 @@ function subLogin(){
     	$.localStorage.remove(pk);
     	$.localStorage.remove(rk);
     }
-    
-   
-	
-
-    window.location.replace("menu.html?menuUserName=sjm");
-        		
-        		//alert(JSON.stringify(json));
-   
-
+    $.ajax({
+		url:'http://localhost:8080/postbar/login/doLogin',
+		type:'post',
+		data:{
+			userName:usrname,
+			password:pwd
+		},
+		dataType:'json',
+		success:function (result) {
+			console.log(result)
+			if(result.code !== 200){
+				$("#tishi").html(result.msg);
+			}else{
+				$.sessionStorage.set("token",result.token);
+				window.location.replace("index.html");
+			}
+		}
+	})
+    // window.location.replace("menu.html?menuUserName=sjm");
 }
-
-
-
-
-
 if(window !=top){
 	top.location.href=location.href;
 }

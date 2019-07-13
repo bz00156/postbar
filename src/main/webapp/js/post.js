@@ -16,16 +16,25 @@ $(document).ready(function () {
 	            'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
 	             'table', 'hr', 'emoticons', ]
 	});
-	
-	
 	var searchNameVal=$("#SEARCH_POST_NAME_HIDDEN").val().trim();
-	getPostList(searchNameVal,0,everyPageDataCount,true,"/postbar/postController/getPostList");
+	getPostList(searchNameVal,0,everyPageDataCount,true,"http://localhost:8080/postbar/postController/getPostList");
 	
 });
 function getPostList(postTitle,pageIndex,everyPageDataCount,SynOrAsyn,url){
-
-	  	$("#SEARCH_POST_NAME_HIDDEN").val(postTitle.trim());
-	  		
+	let token = $.sessionStorage.get('token');
+	$("#SEARCH_POST_NAME_HIDDEN").val(postTitle.trim());
+	$.ajax({
+		url:url,
+		type:'post',
+		data:{},
+		headers:{'Content-Type':'application/json;charset=utf8','token':token},
+		dataType:"json",
+		success:function (result) {
+			if(result.code === 100){
+				window.parent.location.replace('login.html')
+			}
+		}
+	})
 }
 
 function returnPostList(){

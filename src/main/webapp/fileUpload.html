@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="form" action="" onsubmit="return false">
+    <input type="text" id="id" value="10">
+    <input type="file" id="file">
+    <button id="btn">提交</button>
+</form>
+<script src="static/comp/jquery/jquery-1.7.1.js"></script>
+<script>
+    $("#btn").click(function () {
+        let formData = new FormData();
+        formData.append('id',$('#id').val())
+        formData.append('file',$("#file")[0].files[0])
+        $.ajax({
+            url:'http://localhost:8080/postbar/fileUpload',
+            type:'post',
+            data:formData,
+            contentType: false,
+            processData: false,
+            dataType:"json",
+            success:function (result) {
+                console.log(result);
+            }
+        })
+    })
+
+</script>
+</body>
+</html>
