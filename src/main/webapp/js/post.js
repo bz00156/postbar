@@ -30,6 +30,7 @@ function getPostList(postTitle,pageIndex,everyPageDataCount,SynOrAsyn,url){
 		headers:{'Content-Type':'application/json;charset=utf8','token':token},
 		dataType:"json",
 		success:function (result) {
+			console.log(result)
 			if(result.code === 100){
 				window.parent.location.replace('login.html')
 			}

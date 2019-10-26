@@ -1,6 +1,6 @@
 /*
-SQLyog  v12.2.6 (32 bit)
-MySQL - 5.5.27 : Database - post_bar
+SQLyog Ultimate v12.2.6 (32 bit)
+MySQL - 5.6.17 : Database - post_bar
 *********************************************************************
 */
 
@@ -50,6 +50,7 @@ CREATE TABLE `pb_audio` (
 /*Data for the table `pb_audio` */
 
 insert  into `pb_audio`(`auSetUUID`,`userUUID`,`auSetSpd`,`auSetPit`,`auSetVol`,`auSetVoiPer`) values 
+('37b566ec11b74537b83290d68fcb6086','44d37f40cad2464981a9daa5ef70a2e5',5,5,5,0),
 ('6bcef5d528b34deea4d680306e3ee43c','ad313b12f2c54b2b8a7df306f90243b2',5,5,5,0),
 ('d6aaea801ce04790953e6620f8ca1a91','e4f94bf452d9483aaa11972e6cc4d59d',5,5,5,1);
 
@@ -69,6 +70,10 @@ CREATE TABLE `pb_comment` (
 
 /*Data for the table `pb_comment` */
 
+insert  into `pb_comment`(`cmUUID`,`postUUID`,`userUUID`,`cmText`,`cmAudio`,`cmTime`) values 
+('104da35010e749e988789aa705f1cb37','18ec50a15fea4113b6b08d4beb52861d','ad313b12f2c54b2b8a7df306f90243b2','<span style=\"color:#333333;font-family:arial, 宋体, sans-serif;font-size:14px;line-height:24px;background-color:#FFFFFF;\">中软国际有限公司是国内大型综合性软件与信息服务企业，具有极高的市场感召力和客户忠诚度，以领先的技术、丰富的经验、精湛的服务在中国 IT 行业享有极高的声誉。</span>','/postbar/audio/104da35010e749e988789aa705f1cb37.mp3','2019-06-25 10:46:39'),
+('674e21b770794fa58f71ba7fcbde92c6','8cfe1fa4016642e7b68fad165d517441','ad313b12f2c54b2b8a7df306f90243b2','公司目前所涵盖的行业有政府、金融、电信、烟草、物流、交通、能源、互联网等。<br />\n具体项目有金审工程项目、中国银联一卡通跨行取款项目、国家烟草一号工程打码到条项目、北京一号线、二号线、上海市地铁等轨道交通系统、王者荣耀的后台技术支持等。<br />','/postbar/audio/674e21b770794fa58f71ba7fcbde92c6.mp3','2019-06-25 11:25:26');
+
 /*Table structure for table `pb_comment_praise` */
 
 DROP TABLE IF EXISTS `pb_comment_praise`;
@@ -84,7 +89,8 @@ CREATE TABLE `pb_comment_praise` (
 /*Data for the table `pb_comment_praise` */
 
 insert  into `pb_comment_praise`(`cmPrUUID`,`postUUID`,`userUUID`,`cmUUID`) values 
-('42ebd9ae0ade4a489c4679abc72dea22','fd67cc79fbed41118115d063df7d5470','ad313b12f2c54b2b8a7df306f90243b2',NULL);
+('42ebd9ae0ade4a489c4679abc72dea22','fd67cc79fbed41118115d063df7d5470','ad313b12f2c54b2b8a7df306f90243b2',NULL),
+('83a011fb469c4d70b60cb332641bf96e','8cfe1fa4016642e7b68fad165d517441','ad313b12f2c54b2b8a7df306f90243b2','674e21b770794fa58f71ba7fcbde92c6');
 
 /*Table structure for table `pb_post` */
 
@@ -103,6 +109,12 @@ CREATE TABLE `pb_post` (
 
 /*Data for the table `pb_post` */
 
+insert  into `pb_post`(`postUUID`,`userUUID`,`postTitle`,`postText`,`postPageviews`,`postAudio`,`postTime`) values 
+('104dcd0097c011e996adcd5e8c15066c','ad313b12f2c54b2b8a7df306f90243b2','同学们，毕业快乐','同学们，毕业垮了',0,NULL,'2019-06-26 11:11:17'),
+('18ec50a15fea4113b6b08d4beb52861d','ad313b12f2c54b2b8a7df306f90243b2','中软国际是什么样的公司','中软国际是什么样的公司',3,NULL,'2019-06-25 10:45:51'),
+('6245093097bf11e9b08f091c9d2895ea','ad313b12f2c54b2b8a7df306f90243b2','各位同学，你们期待毕业吗？','各位同学，你们期待毕业吗？',0,NULL,'2019-06-26 11:06:25'),
+('8cfe1fa4016642e7b68fad165d517441','ad313b12f2c54b2b8a7df306f90243b2','中软国际做过哪些项目？','中软国际做过哪些项目？',3,NULL,'2019-06-25 11:25:18');
+
 /*Table structure for table `pb_post_praise` */
 
 DROP TABLE IF EXISTS `pb_post_praise`;
@@ -115,6 +127,9 @@ CREATE TABLE `pb_post_praise` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `pb_post_praise` */
+
+insert  into `pb_post_praise`(`poPrUUID`,`postUUID`,`userUUID`) values 
+('d5656f8b49174533b7b46f79cd69de57','8cfe1fa4016642e7b68fad165d517441','ad313b12f2c54b2b8a7df306f90243b2');
 
 /*Table structure for table `pb_register` */
 
@@ -135,6 +150,7 @@ CREATE TABLE `pb_register` (
 
 insert  into `pb_register`(`regUUID`,`userUUID`,`regSex`,`regAge`,`regEmial`,`regPhoto`,`regTime`) values 
 ('3c51cf5926d447c4b965459a0639057c','e4f94bf452d9483aaa11972e6cc4d59d','0',37,'sjm@163.com','/postbar/headPhoto/default/default.jpg','2019-03-12 12:46:38'),
+('648849c3b7d7474191c4fa3909622952','44d37f40cad2464981a9daa5ef70a2e5','0',14,'vds@123.com','/postbar/headPhoto/default/default.jpg','2019-06-20 09:18:06'),
 ('9425cfc0384a430787daeecda1ab3beb','ad313b12f2c54b2b8a7df306f90243b2','1',40,'wangxiao@163.com','/postbar/headPhoto/default/default.jpg','2019-03-12 12:47:11');
 
 /*Table structure for table `pb_user` */
@@ -153,7 +169,8 @@ CREATE TABLE `pb_user` (
 /*Data for the table `pb_user` */
 
 insert  into `pb_user`(`userUUID`,`userName`,`password`,`loginTime`,`admin`) values 
-('ad313b12f2c54b2b8a7df306f90243b2','admin','96e79218965eb72c92a549dd5a330112','2019-06-12 15:48:42','1'),
+('44d37f40cad2464981a9daa5ef70a2e5','zhangsan','96e79218965eb72c92a549dd5a330112','2019-06-20 09:18:17','0'),
+('ad313b12f2c54b2b8a7df306f90243b2','wangxiaohua','96e79218965eb72c92a549dd5a330112','2019-06-25 11:21:34','1'),
 ('e4f94bf452d9483aaa11972e6cc4d59d','sjm','96e79218965eb72c92a549dd5a330112','2019-03-17 20:39:20','0');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
